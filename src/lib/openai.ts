@@ -19,8 +19,8 @@ export class CostCeilingError extends Error {
   }
 }
 
-const DEFAULT_PRICE_IN_PER_M = 2.5;
-const DEFAULT_PRICE_OUT_PER_M = 15;
+const DEFAULT_PRICE_IN_PER_M = 5;
+const DEFAULT_PRICE_OUT_PER_M = 30;
 const DEFAULT_WEB_SEARCH_PRICE = 0.01;
 
 function envNumber(value: string | undefined, fallback: number, name: string): number {

@@ -41,3 +41,14 @@ test('limited site data shows the disclosure note', () => {
   limited.meta.limitedSiteData = true;
   assert.ok(renderReportHtml(limited).includes('based on public web data only'));
 });
+
+test('appeared visibility rows label only the other named businesses', () => {
+  const snapshot = structuredClone(FIXTURE_SNAPSHOT);
+  snapshot.visibility.questions[0]!.appeared = true;
+  snapshot.visibility.questions[0]!.winners = ['Fixture Sample Co', 'Other HVAC Co'];
+
+  const html = renderReportHtml(snapshot);
+
+  assert.ok(html.includes('You appeared - other businesses named: Other HVAC Co'));
+  assert.ok(!html.includes('You appeared - assistants named:'));
+});

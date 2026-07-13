@@ -94,17 +94,25 @@ function visibilitySection(snapshot: Snapshot): string {
       <p class="note">The visibility check could not be completed for this run.</p></section>`;
   }
 
+  const targetName = snapshot.business.name.toLocaleLowerCase('en-US').replace(/[^a-z0-9]+/g, ' ').trim();
   const rows = snapshot.visibility.questions
-    .map(
-      (question) => `<li class="${question.appeared ? 'hit' : 'miss'}">
+    .map((question) => {
+      const namedBusinesses = question.appeared
+        ? question.winners.filter((winner) => {
+            const candidate = winner.toLocaleLowerCase('en-US').replace(/[^a-z0-9]+/g, ' ').trim();
+            return !candidate.includes(targetName) && !targetName.includes(candidate);
+          })
+        : question.winners;
+      const namedLabel = question.appeared ? 'other businesses named' : 'assistants named';
+      return `<li class="${question.appeared ? 'hit' : 'miss'}">
         <p class="q">&quot;${safeText(question.q)}&quot;</p>
         <p class="verdict">${question.appeared ? 'You appeared' : 'You did not appear'}${
-          question.winners.length
-            ? ` - assistants named: ${safeText(question.winners.join(', '))}`
+          namedBusinesses.length
+            ? ` - ${namedLabel}: ${safeText(namedBusinesses.join(', '))}`
             : ''
         }</p>
-        ${question.missing ? `<p class="missing">${safeText(question.missing)}</p>` : ''}</li>`,
-    )
+        ${question.missing ? `<p class="missing">${safeText(question.missing)}</p>` : ''}</li>`;
+    })
     .join('');
 
   return `<section class="card">

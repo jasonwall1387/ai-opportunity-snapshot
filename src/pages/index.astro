@@ -36,6 +36,7 @@ export const prerender = false;
         </select>
       </label>
       <button class="cta" type="submit">{COPY.intakeCta}</button>
+      <p class="note" id="generation-status" aria-live="polite"></p>
       <p class="error-box" id="error" role="alert" aria-live="polite"></p>
     </form>
     <a class="secondary-link" href="/s/fixture-sample-co-abc234">View a sample report</a>
@@ -49,13 +50,19 @@ export const prerender = false;
 <script>
   const form = document.querySelector<HTMLFormElement>('#intake');
   const errorBox = document.querySelector<HTMLParagraphElement>('#error');
+  const generationStatus = document.querySelector<HTMLParagraphElement>('#generation-status');
 
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
-    if (!errorBox) return;
+    if (!errorBox || !generationStatus) return;
     errorBox.textContent = '';
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-    if (button) button.disabled = true;
+    const originalButtonLabel = button?.textContent ?? 'Run my free Snapshot';
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Researching with GPT-5.6...';
+    }
+    generationStatus.textContent = 'This usually takes about a minute. Keep this tab open.';
 
     try {
       const response = await fetch('/api/snapshot', {
@@ -70,7 +77,11 @@ export const prerender = false;
       window.location.assign(`/s/${encodeURIComponent(result.slug)}`);
     } catch (error: unknown) {
       errorBox.textContent = error instanceof Error ? error.message : 'Something went wrong';
-      if (button) button.disabled = false;
+      generationStatus.textContent = '';
+      if (button) {
+        button.disabled = false;
+        button.textContent = originalButtonLabel;
+      }
     }
   });
 </script>

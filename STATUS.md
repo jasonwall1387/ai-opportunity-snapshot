@@ -9,20 +9,25 @@ Updated: 2026-07-13
 - GPT-5.6 Responses API pipeline with web search and strict structured outputs
 - Deterministic capped ROI estimate and copy safeguards
 - Cloudflare KV persistence, status polling, rate limiting, and shareable JSON
-- CLI fixture path, 56 unit tests, browser verification, production build, and live sample deployment
+- Production `OPENAI_API_KEY` transferred securely from Infisical to the Worker
+- Long model-backed requests kept connected past Cloudflare's detached-work limit
+- Current GPT-5.6 cost defaults and bounded, cleaned visibility output
+- CLI fixture path, 61 unit tests, browser verification, production build, and live deployment
+- Golden reports: Legacy Plumbing 72, T-Rock Roofing 60, Jessi James Project Pro 32
+- Stability rerun: T-Rock Roofing 59, in the same band as the 60-point run
 
 ## In progress
 
-- Production model credential setup
-- Judge-facing golden runs and stability rerun
+- Demo video recording
+- Build Week `/feedback` Session ID
+- Devpost submission
 
 ## Blocked
 
-- Real GPT-5.6 runs require `OPENAI_API_KEY`; no key was available during this build session
-- Demo video and submission Session ID require the final model-backed walkthrough and `/feedback`
+- The demo video, `/feedback` Session ID, and final Devpost submission require Jason's final walkthrough and form submission.
 
 ## Next
 
-1. Add the Worker secret interactively.
-2. Run the three golden businesses and the stability rerun.
-3. Record the demo video, run `/feedback`, and complete the submission form.
+1. Record the under-three-minute demo using one verified report.
+2. Run `/feedback` in this primary Codex session and record the Session ID.
+3. Complete and submit the Devpost form before July 21, 2026 at 5:00 PM PT.

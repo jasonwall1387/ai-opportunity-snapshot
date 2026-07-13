@@ -6,19 +6,20 @@ Enter a local service business and GPT-5.6 researches it live, then returns a sh
 
 **Sample report:** [Fixture Sample Co](https://opportunity-snapshot.airevenuestack-jason.workers.dev/s/fixture-sample-co-abc234)
 
-**Demo video:** Final recording is pending the model-backed golden runs.
+**Demo video:** Final recording is pending.
 
 ## Try it (judges)
 
 The sample report is live without an API call and includes the score, deterministic estimate, recommended starting automation, visibility results, and [raw JSON](https://opportunity-snapshot.airevenuestack-jason.workers.dev/api/snapshot/fixture-sample-co-abc234.json).
 
-Suggested live inputs once model-backed generation is enabled:
+Verified model-backed reports spanning the scoring range:
 
-- Milestone Electric, A/C & Plumbing - `https://callmilestone.com` - HVAC
-- Legacy Plumbing - `https://legacyplumbing.net` - plumbing
-- T-Rock Roofing - `https://t-rockroofing.com` - roofing
+- Strong presence: [Legacy Plumbing - 72](https://opportunity-snapshot.airevenuestack-jason.workers.dev/s/legacy-plumbing-wmfdyv)
+- Middle presence: [T-Rock Roofing - 60](https://opportunity-snapshot.airevenuestack-jason.workers.dev/s/t-rock-roofing-7vpa2d)
+- Thin presence: [Jessi James Project Pro - 32](https://opportunity-snapshot.airevenuestack-jason.workers.dev/s/jessi-james-project-pro-ucvpu3)
+- Stability rerun: [T-Rock Roofing - 59](https://opportunity-snapshot.airevenuestack-jason.workers.dev/s/t-rock-roofing-3xez8w), in the same `Findable but manual` band
 
-Or use any local service business you know. Each run takes about a minute and produces a shareable URL. Raw data for a generated report is available at `/api/snapshot/<slug>.json`.
+Or use any local service business you know. Each run takes about one to two minutes and produces a shareable URL. Raw data for a generated report is available at `/api/snapshot/<slug>.json`.
 
 ## How GPT-5.6 is used
 
@@ -27,10 +28,11 @@ Or use any local service business you know. Each run takes about a minute and pr
 - Analysis: strict JSON-schema structured outputs score the business against a pinned rubric for stable bands across reruns.
 - GPT-5.6 is not allowed to produce dollar figures. All revenue math is deterministic TypeScript from a printed assumptions table, hard-capped at 25% of estimated current volume.
 - Usage is metered per run, including web-search calls, and generation stops when the configured estimated cost ceiling is crossed.
+- The production request stays connected until generation finishes so Cloudflare does not cancel long model-backed work after returning a response.
 
 ## How Codex was used
 
-Codex built the application task by task in one primary session: repository setup, unit tests, the framework-independent pipeline, OpenAI Responses integration, Cloudflare persistence, the CLI, the Astro interface, and deployment. It used test-first loops for the business rules and failure modes, then verified the rendered application in a real browser at desktop and mobile sizes. That browser pass caught a Cloudflare adapter boundary issue that normal type checks did not expose.
+Codex built the application task by task in one primary session: repository setup, unit tests, the framework-independent pipeline, OpenAI Responses integration, Cloudflare persistence, the CLI, the Astro interface, and deployment. It used test-first loops for the business rules and failure modes, then verified the rendered application in a real browser at desktop and mobile sizes. Live golden runs exposed Cloudflare's 30-second detached-work limit, an outdated model-price estimate, and overly verbose visibility fields. Codex reproduced each issue, added regression tests, deployed the corrections, and reran the reports.
 
 The builder supplied the product design, scoring bands, conservative vertical assumptions, brand constraints, and deployment goal. Codex made implementation decisions inside those boundaries, including updating the original Astro 5 plan to the current Astro 6 adapter contract, pricing web-search calls in the run ceiling, bounding downloaded page bodies, rejecting private-network URLs, hashing rate-limit identities, and adding a zero-credit sample report. Official OpenAI and Cloudflare documentation was checked where shipped APIs had moved beyond the written plan.
 

@@ -22,8 +22,8 @@ function fakeResponse(json: unknown, inputTokens = 1000, outputTokens = 500) {
 test('llmConfigFromEnv applies current defaults', () => {
   const result = llmConfigFromEnv({ OPENAI_API_KEY: 'k' });
   assert.equal(result.model, 'gpt-5.6');
-  assert.equal(result.priceInPerM, 2.5);
-  assert.equal(result.priceOutPerM, 15);
+  assert.equal(result.priceInPerM, 5);
+  assert.equal(result.priceOutPerM, 30);
   assert.equal(result.priceWebSearchPerCall, 0.01);
   assert.equal(result.maxRunCostUsd, 1.5);
 });

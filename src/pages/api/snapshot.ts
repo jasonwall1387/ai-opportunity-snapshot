@@ -52,7 +52,7 @@ async function readBoundedJson(request: Request): Promise<unknown> {
   return JSON.parse(new TextDecoder().decode(bytes));
 }
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request }) => {
   let body: unknown;
   try {
     body = await readBoundedJson(request);
@@ -83,6 +83,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
     ...baseConfig,
     safetyIdentifier: await privacyIdentifier(identity),
   });
-  locals.cfContext.waitUntil(runPipeline(normalized.input, slug, { store, llm }));
+  await runPipeline(normalized.input, slug, { store, llm });
   return json({ slug }, 202);
 };
