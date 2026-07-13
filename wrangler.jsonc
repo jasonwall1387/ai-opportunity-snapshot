@@ -9,7 +9,7 @@
     "binding": "ASSETS"
   },
   "kv_namespaces": [
-    { "binding": "SNAPSHOTS", "id": "REPLACED_IN_DEPLOY_TASK" }
+    { "binding": "SNAPSHOTS", "id": "4e8abc15d2b84c7ba494fcea4043c2b5" }
   ],
   "observability": {
     "enabled": true,
