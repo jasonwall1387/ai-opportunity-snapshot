@@ -1,6 +1,76 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { COPY } from '../lib/copy.ts';
+import { VERTICALS, verticalRow } from '../lib/roi.ts';
+
+export const prerender = false;
 ---
-<html lang="en">
-  <head><meta charset="utf-8" /><title>AI Opportunity Snapshot</title></head>
-  <body><h1>AI Opportunity Snapshot</h1></body>
-</html>
+<Layout title={COPY.productName} description={COPY.tagline}>
+  <header class="hero">
+    <p class="kicker">Free live business research</p>
+    <h1>{COPY.productName}</h1>
+    <p class="lede note">{COPY.tagline}</p>
+  </header>
+
+  <section class="card" aria-labelledby="intake-heading">
+    <h2 id="intake-heading">Where could AI create leverage?</h2>
+    <form class="intake" id="intake">
+      <label>
+        Business name
+        <input name="name" required minlength="2" maxlength="80" autocomplete="organization" placeholder="Acme HVAC" />
+      </label>
+      <label>
+        Website
+        <input name="url" required inputmode="url" autocomplete="url" maxlength="2048" placeholder="acmehvac.com" />
+      </label>
+      <label>
+        City (optional, improves the visibility check)
+        <input name="city" maxlength="100" autocomplete="address-level2" placeholder="Plano, TX" />
+      </label>
+      <label>
+        What kind of business?
+        <select name="vertical">
+          {VERTICALS.map((vertical) => (
+            <option value={vertical} selected={vertical === 'general'}>{verticalRow(vertical).label}</option>
+          ))}
+        </select>
+      </label>
+      <button class="cta" type="submit">{COPY.intakeCta}</button>
+      <p class="error-box" id="error" role="alert" aria-live="polite"></p>
+    </form>
+    <a class="secondary-link" href="/s/fixture-sample-co-abc234">View a sample report</a>
+  </section>
+
+  <footer class="report-foot">
+    <p><a href={COPY.footerUrl}>{COPY.footerCredit}</a></p>
+  </footer>
+</Layout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#intake');
+  const errorBox = document.querySelector<HTMLParagraphElement>('#error');
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!errorBox) return;
+    errorBox.textContent = '';
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (button) button.disabled = true;
+
+    try {
+      const response = await fetch('/api/snapshot', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form).entries())),
+      });
+      const body: unknown = await response.json();
+      const result = body !== null && typeof body === 'object' ? body as Record<string, unknown> : {};
+      if (!response.ok) throw new Error(typeof result.error === 'string' ? result.error : 'Something went wrong');
+      if (typeof result.slug !== 'string') throw new Error('The response did not include a report link');
+      window.location.assign(`/s/${encodeURIComponent(result.slug)}`);
+    } catch (error: unknown) {
+      errorBox.textContent = error instanceof Error ? error.message : 'Something went wrong';
+      if (button) button.disabled = false;
+    }
+  });
+</script>

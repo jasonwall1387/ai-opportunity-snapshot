@@ -1,0 +1,89 @@
+---
+import { env } from 'cloudflare:workers';
+import Layout from '../../layouts/Layout.astro';
+import { KvStore } from '../../lib/store.ts';
+import { renderReportHtml } from '../../lib/render-report.ts';
+import { COPY } from '../../lib/copy.ts';
+import { FIXTURE_SNAPSHOT } from '../../lib/data/fixture-snapshot.ts';
+
+export const prerender = false;
+
+const slug = Astro.params.slug ?? '';
+const isFixture = slug === FIXTURE_SNAPSHOT.slug;
+const store = new KvStore(env.SNAPSHOTS);
+const snapshot = isFixture ? FIXTURE_SNAPSHOT : slug ? await store.getSnapshot(slug) : null;
+const status = snapshot || !slug ? null : await store.getStatus(slug);
+
+if (!snapshot && !status) return new Response('Not found', { status: 404 });
+
+const title = snapshot
+  ? `${snapshot.business.name} - ${COPY.productName}`
+  : `Generating - ${COPY.productName}`;
+const reportHtml = snapshot ? renderReportHtml(snapshot) : '';
+---
+<Layout title={title}>
+  {snapshot ? (
+    <>
+      <p class="share-row"><button class="cta" id="share" type="button">{COPY.shareLabel}</button></p>
+      <Fragment set:html={reportHtml} />
+    </>
+  ) : (
+    <div class="progress" id="progress" data-slug={slug}>
+      <div class="spinner" aria-hidden="true"></div>
+      <h1>Generating your Snapshot</h1>
+      <p class="stage-label" id="stage" aria-live="polite">Starting...</p>
+      <p class="note">{COPY.progressHint}</p>
+      <p class="error-box" id="progress-error" role="alert"></p>
+    </div>
+  )}
+</Layout>
+
+<script>
+  const share = document.querySelector<HTMLButtonElement>('#share');
+  share?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      share.textContent = 'Link copied';
+    } catch {
+      share.textContent = 'Copy failed';
+    }
+  });
+
+  const progress = document.querySelector<HTMLElement>('#progress');
+  if (progress) {
+    const slug = progress.dataset.slug;
+    const stageElement = document.querySelector<HTMLElement>('#stage');
+    const errorElement = document.querySelector<HTMLElement>('#progress-error');
+    const labels: Record<string, string> = {
+      queued: 'Queued...',
+      researching: 'Researching the business on the live web...',
+      'checking-visibility': 'Asking the questions your customers ask AI...',
+      analyzing: 'Scoring readiness and ranking opportunities...',
+    };
+
+    const poll = async (): Promise<void> => {
+      try {
+        const response = await fetch(`/api/status/${encodeURIComponent(slug ?? '')}`, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Status unavailable');
+        const body: unknown = await response.json();
+        const status = body !== null && typeof body === 'object' ? body as Record<string, unknown> : {};
+        if (status.stage === 'done') {
+          window.location.reload();
+          return;
+        }
+        if (status.stage === 'error') {
+          if (errorElement) errorElement.textContent = typeof status.error === 'string' ? status.error : 'This run failed.';
+          return;
+        }
+        if (stageElement && typeof status.stage === 'string') {
+          stageElement.textContent = labels[status.stage] ?? status.stage;
+        }
+      } catch {
+        // A transient read can recover on the next poll.
+      }
+      window.setTimeout(poll, 2_500);
+    };
+
+    void poll();
+  }
+</script>

@@ -5,7 +5,7 @@ import { Llm, llmConfigFromEnv } from '../../lib/openai.ts';
 import { runPipeline } from '../../lib/pipeline.ts';
 import { makeSlug } from '../../lib/slug.ts';
 import { checkRateLimit, privacyIdentifier } from '../../lib/rate-limit.ts';
-import { normalizeSnapshotInput } from '../../lib/input.ts';
+import { normalizeSnapshotInput, requestIdentity } from '../../lib/input.ts';
 
 export const prerender = false;
 
@@ -52,7 +52,7 @@ async function readBoundedJson(request: Request): Promise<unknown> {
   return JSON.parse(new TextDecoder().decode(bytes));
 }
 
-export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   let body: unknown;
   try {
     body = await readBoundedJson(request);
@@ -70,8 +70,7 @@ export const POST: APIRoute = async ({ request, locals, clientAddress }) => {
     return json({ error: 'Snapshot generation is not configured yet' }, 503);
   }
 
-  const identity =
-    request.headers.get('cf-connecting-ip') ?? clientAddress ?? 'unknown-client';
+  const identity = requestIdentity(request);
   if (!(await checkRateLimit(env.SNAPSHOTS, identity))) {
     return json({ error: 'Rate limit reached - try again in an hour' }, 429);
   }

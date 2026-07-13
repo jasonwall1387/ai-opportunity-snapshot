@@ -5,6 +5,10 @@ export type InputResult =
   | { ok: true; input: SnapshotInput }
   | { ok: false; error: string };
 
+export function requestIdentity(request: Request): string {
+  return request.headers.get('cf-connecting-ip') ?? 'unknown-client';
+}
+
 function textField(record: Record<string, unknown>, key: string): string {
   return typeof record[key] === 'string' ? record[key].trim() : '';
 }

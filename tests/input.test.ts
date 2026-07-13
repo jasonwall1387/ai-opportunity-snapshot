@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { normalizeSnapshotInput } from '../src/lib/input.ts';
+import { normalizeSnapshotInput, requestIdentity } from '../src/lib/input.ts';
 
 test('normalizes a bare public hostname and trims optional fields', () => {
   const result = normalizeSnapshotInput({
@@ -48,4 +48,12 @@ test('rejects local and private network targets', () => {
 
 test('allows a public IPv4 target', () => {
   assert.equal(normalizeSnapshotInput({ name: 'Acme', url: 'https://8.8.8.8' }).ok, true);
+});
+
+test('request identity uses the Cloudflare header without adapter-only context access', () => {
+  const withHeader = new Request('https://app.example', {
+    headers: { 'cf-connecting-ip': '203.0.113.4' },
+  });
+  assert.equal(requestIdentity(withHeader), '203.0.113.4');
+  assert.equal(requestIdentity(new Request('https://app.example')), 'unknown-client');
 });
