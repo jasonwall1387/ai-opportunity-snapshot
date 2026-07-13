@@ -5,6 +5,7 @@
 - Live Worker: <https://opportunity-snapshot.airevenuestack-jason.workers.dev>
 - Public sample report: <https://opportunity-snapshot.airevenuestack-jason.workers.dev/s/fixture-sample-co-abc234>
 - Public repository: <https://github.com/jasonwall1387/ai-opportunity-snapshot>
+- Devpost draft: <https://devpost.com/software/ai-opportunity-snapshot>
 - Model-backed generation: live with `OPENAI_API_KEY` stored as a Worker secret
 - Golden runs: complete across strong, middle, and thin web presences
 
@@ -17,6 +18,17 @@
 
 ## Submission actions
 
+### Prefilled Devpost values
+
+- Submitter type: Individual
+- Country of residence: United States
+- Category: Work & Productivity
+- Repository: <https://github.com/jasonwall1387/ai-opportunity-snapshot>
+- Judge test link: <https://opportunity-snapshot.airevenuestack-jason.workers.dev>
+- Judge instructions: No credentials required. A model-backed run usually takes one to two minutes. A verified report is available at <https://opportunity-snapshot.airevenuestack-jason.workers.dev/s/legacy-plumbing-wmfdyv>.
+- `/feedback` Session ID: pending
+- Public YouTube demo URL: pending
+
 - [ ] Run `/feedback` in the primary Codex session and record the Session ID here.
 - [ ] Record a public demo video under 3 minutes.
   - 0:00 - the problem: missed calls and weak AI visibility
@@ -26,6 +38,7 @@
   - 2:45 - close with the live link and track
   - Audio must explicitly cover how Codex and GPT-5.6 were used.
 - [ ] Complete the Devpost form: Work & Productivity track, repository URL, live URL, video URL, and Session ID.
+- [x] Create and populate the Devpost draft project.
 - [x] Run three golden businesses spanning strong, average, and thin web presence.
 - [x] Rerun the middle business and confirm both runs land in the same score band.
 - [x] Set the production `OPENAI_API_KEY` from Infisical as a Worker secret.

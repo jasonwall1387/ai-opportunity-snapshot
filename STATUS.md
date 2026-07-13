@@ -14,6 +14,7 @@ Updated: 2026-07-13
 - Current GPT-5.6 cost defaults and bounded, cleaned visibility output
 - CLI fixture path, 61 unit tests, browser verification, production build, and live deployment
 - README verified from a clean public clone: install, tests, fixture snapshot, and local dev HTTP 200
+- Devpost draft created and populated with the project description, stack, live app, and repository
 - Golden reports: Legacy Plumbing 72, T-Rock Roofing 60, Jessi James Project Pro 32
 - Stability rerun: T-Rock Roofing 59, in the same band as the 60-point run
 
@@ -25,10 +26,10 @@ Updated: 2026-07-13
 
 ## Blocked
 
-- The demo video, `/feedback` Session ID, and final Devpost submission require Jason's final walkthrough and form submission.
+- The demo video and `/feedback` Session ID require Jason. The connected Devpost submission can finish once both are supplied.
 
 ## Next
 
 1. Record the under-three-minute demo using one verified report.
 2. Run `/feedback` in this primary Codex session and record the Session ID.
-3. Complete and submit the Devpost form before July 21, 2026 at 5:00 PM PT.
+3. Add both URLs to the Devpost draft and submit before July 21, 2026 at 5:00 PM PT.
