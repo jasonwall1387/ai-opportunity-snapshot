@@ -30,5 +30,6 @@
 - [x] Rerun the middle business and confirm both runs land in the same score band.
 - [x] Set the production `OPENAI_API_KEY` from Infisical as a Worker secret.
 - [x] Confirm the repository is public, the MIT license is present, and the README is current.
+- [x] Verify the README from a clean public clone: install, tests, fixture snapshot, and local dev HTTP 200.
 - [x] Confirm no key-like string exists in history: `git log -p | rg -i "sk-[a-z0-9_-]{20,}"`.
 - [ ] Submit before Tuesday, July 21, 2026 at 5:00 PM PT. Target July 20 for buffer.

@@ -13,6 +13,7 @@ Updated: 2026-07-13
 - Long model-backed requests kept connected past Cloudflare's detached-work limit
 - Current GPT-5.6 cost defaults and bounded, cleaned visibility output
 - CLI fixture path, 61 unit tests, browser verification, production build, and live deployment
+- README verified from a clean public clone: install, tests, fixture snapshot, and local dev HTTP 200
 - Golden reports: Legacy Plumbing 72, T-Rock Roofing 60, Jessi James Project Pro 32
 - Stability rerun: T-Rock Roofing 59, in the same band as the 60-point run
 
