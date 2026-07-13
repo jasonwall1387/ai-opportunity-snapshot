@@ -31,7 +31,16 @@ function envNumber(value: string | undefined, fallback: number, name: string): n
   return parsed;
 }
 
-export function llmConfigFromEnv(env: Record<string, string | undefined>): LlmConfig {
+export interface LlmEnv {
+  OPENAI_API_KEY?: string;
+  OPENAI_MODEL?: string;
+  OPENAI_PRICE_IN_PER_M?: string;
+  OPENAI_PRICE_OUT_PER_M?: string;
+  OPENAI_PRICE_WEB_SEARCH?: string;
+  MAX_RUN_COST_USD?: string;
+}
+
+export function llmConfigFromEnv(env: LlmEnv): LlmConfig {
   const apiKey = env.OPENAI_API_KEY;
   if (!apiKey) throw new Error('OPENAI_API_KEY is required');
 
