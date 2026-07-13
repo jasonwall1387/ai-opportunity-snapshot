@@ -1,0 +1,86 @@
+{
+  "remodeling": {
+    "label": "Remodeling",
+    "problemPhrase": "a kitchen remodel",
+    "avgJobValue": { "low": 8000, "high": 25000 },
+    "monthlyInboundCalls": { "low": 30, "high": 80 },
+    "missedCallRate": 0.25,
+    "newLeadShare": 0.4,
+    "recoveryRate": 0.3,
+    "closeRate": 0.25,
+    "estMonthlyNewJobs": { "low": 3, "high": 8 },
+    "source": "Conservative industry estimate for small residential remodelers; edit to fit your shop"
+  },
+  "hvac": {
+    "label": "HVAC",
+    "problemPhrase": "my AC fixed today",
+    "avgJobValue": { "low": 350, "high": 900 },
+    "monthlyInboundCalls": { "low": 80, "high": 250 },
+    "missedCallRate": 0.27,
+    "newLeadShare": 0.45,
+    "recoveryRate": 0.3,
+    "closeRate": 0.5,
+    "estMonthlyNewJobs": { "low": 25, "high": 90 },
+    "source": "Blended service-call value excluding full system installs; conservative industry estimate"
+  },
+  "roofing": {
+    "label": "Roofing",
+    "problemPhrase": "a roof leak repaired",
+    "avgJobValue": { "low": 1200, "high": 9000 },
+    "monthlyInboundCalls": { "low": 40, "high": 120 },
+    "missedCallRate": 0.25,
+    "newLeadShare": 0.5,
+    "recoveryRate": 0.3,
+    "closeRate": 0.35,
+    "estMonthlyNewJobs": { "low": 6, "high": 20 },
+    "source": "Repair-to-replacement blend for residential roofers; conservative industry estimate"
+  },
+  "electrical": {
+    "label": "Electrical",
+    "problemPhrase": "an electrician for a breaker that keeps tripping",
+    "avgJobValue": { "low": 300, "high": 1500 },
+    "monthlyInboundCalls": { "low": 60, "high": 180 },
+    "missedCallRate": 0.27,
+    "newLeadShare": 0.45,
+    "recoveryRate": 0.3,
+    "closeRate": 0.45,
+    "estMonthlyNewJobs": { "low": 20, "high": 60 },
+    "source": "Residential service work blend; conservative industry estimate"
+  },
+  "plumbing": {
+    "label": "Plumbing",
+    "problemPhrase": "an emergency plumber",
+    "avgJobValue": { "low": 300, "high": 1200 },
+    "monthlyInboundCalls": { "low": 80, "high": 220 },
+    "missedCallRate": 0.28,
+    "newLeadShare": 0.45,
+    "recoveryRate": 0.3,
+    "closeRate": 0.5,
+    "estMonthlyNewJobs": { "low": 25, "high": 80 },
+    "source": "Residential service work blend; conservative industry estimate"
+  },
+  "landscaping": {
+    "label": "Landscaping",
+    "problemPhrase": "a landscaping quote",
+    "avgJobValue": { "low": 400, "high": 3000 },
+    "monthlyInboundCalls": { "low": 40, "high": 120 },
+    "missedCallRate": 0.25,
+    "newLeadShare": 0.5,
+    "recoveryRate": 0.3,
+    "closeRate": 0.35,
+    "estMonthlyNewJobs": { "low": 10, "high": 35 },
+    "source": "Maintenance-to-install blend; conservative industry estimate"
+  },
+  "general": {
+    "label": "General home services",
+    "problemPhrase": "help with a home repair",
+    "avgJobValue": { "low": 300, "high": 2000 },
+    "monthlyInboundCalls": { "low": 40, "high": 150 },
+    "missedCallRate": 0.26,
+    "newLeadShare": 0.45,
+    "recoveryRate": 0.3,
+    "closeRate": 0.4,
+    "estMonthlyNewJobs": { "low": 10, "high": 40 },
+    "source": "Cross-vertical conservative default; edit to fit the business"
+  }
+}
