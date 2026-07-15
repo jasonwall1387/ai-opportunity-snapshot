@@ -26,7 +26,7 @@
 - Repository: <https://github.com/jasonwall1387/ai-opportunity-snapshot>
 - Judge test link: <https://opportunity-snapshot.airevenuestack-jason.workers.dev>
 - Judge instructions: No credentials required. A model-backed run usually takes one to two minutes. A verified report is available at <https://opportunity-snapshot.airevenuestack-jason.workers.dev/s/legacy-plumbing-wmfdyv>.
-- `/feedback` Session ID: pending
+- `/feedback` Session ID: 019f5d39-271b-7c93-8a50-90e273b4b824
 - Public YouTube demo URL: pending
 
 - [ ] Run `/feedback` in the primary Codex session and record the Session ID here.
