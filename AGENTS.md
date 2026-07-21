@@ -24,6 +24,6 @@ persistence.
   user-facing copy. Tests enforce this.
 - All dollar figures are estimates computed in `src/lib/roi.ts` from the printed assumptions table.
   The LLM never produces dollar amounts.
-- Secrets are injected from Infisical locally or stored as Worker secrets in production. Never
-  commit keys.
+- Secrets are injected from a local secret manager during development or stored as Worker secrets
+  in production. Never commit keys.
 - The model ID comes from `OPENAI_MODEL` and defaults to `gpt-5.6`.

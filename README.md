@@ -6,7 +6,7 @@ Enter a local service business and GPT-5.6 researches it live, then returns a sh
 
 **Sample report:** [Fixture Sample Co](https://opportunity-snapshot.airevenuestack-jason.workers.dev/s/fixture-sample-co-abc234)
 
-**Demo video:** Final recording is pending.
+**Demo video:** [youtu.be/Bm5Icjv39cQ](https://youtu.be/Bm5Icjv39cQ)
 
 ## Try it (judges)
 

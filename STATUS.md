@@ -9,7 +9,7 @@ Updated: 2026-07-13
 - GPT-5.6 Responses API pipeline with web search and strict structured outputs
 - Deterministic capped ROI estimate and copy safeguards
 - Cloudflare KV persistence, status polling, rate limiting, and shareable JSON
-- Production `OPENAI_API_KEY` transferred securely from Infisical to the Worker
+- Production `OPENAI_API_KEY` transferred securely from the local secret manager to the Worker
 - Long model-backed requests kept connected past Cloudflare's detached-work limit
 - Current GPT-5.6 cost defaults and bounded, cleaned visibility output
 - CLI fixture path, 61 unit tests, browser verification, production build, and live deployment

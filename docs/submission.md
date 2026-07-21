@@ -27,10 +27,10 @@
 - Judge test link: <https://opportunity-snapshot.airevenuestack-jason.workers.dev>
 - Judge instructions: No credentials required. A model-backed run usually takes one to two minutes. A verified report is available at <https://opportunity-snapshot.airevenuestack-jason.workers.dev/s/legacy-plumbing-wmfdyv>.
 - `/feedback` Session ID: 019f5d39-271b-7c93-8a50-90e273b4b824
-- Public YouTube demo URL: pending
+- Public YouTube demo URL: <https://youtu.be/Bm5Icjv39cQ>
 
-- [ ] Run `/feedback` in the primary Codex session and record the Session ID here.
-- [ ] Record a public demo video under 3 minutes.
+- [x] Run `/feedback` in the primary Codex session and record the Session ID here.
+- [x] Record a public demo video under 3 minutes.
   - 0:00 - the problem: missed calls and weak AI visibility
   - 0:25 - live run on a real business
   - 1:10 - report walkthrough: score, estimated range and assumptions, first automation, visibility
@@ -41,7 +41,7 @@
 - [x] Create and populate the Devpost draft project.
 - [x] Run three golden businesses spanning strong, average, and thin web presence.
 - [x] Rerun the middle business and confirm both runs land in the same score band.
-- [x] Set the production `OPENAI_API_KEY` from Infisical as a Worker secret.
+- [x] Set the production `OPENAI_API_KEY` from the local secret manager as a Worker secret.
 - [x] Confirm the repository is public, the MIT license is present, and the README is current.
 - [x] Verify the README from a clean public clone: install, tests, fixture snapshot, and local dev HTTP 200.
 - [x] Confirm no key-like string exists in history: `git log -p | rg -i "sk-[a-z0-9_-]{20,}"`.
